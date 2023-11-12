@@ -1,0 +1,37 @@
+<%- include('head.ejs') -%>
+    
+<header id="header">
+    <div class="contenedor-header">
+        <a class="empresa" href="/">FOODIED</a>
+        <button id="menuResponsive" class="menu-responsive"><i class="bi bi-list"></i></button>
+        <div class="contenedor-menu-responsive">
+            <nav>
+                <a href="/">Inicio</a>
+                <a href="#menuEspecial">Menu</a>
+                <a href="#sobreNosotros">Sobre Nosotros</a>
+                <a href="#contactos">Contacto</a>
+            </nav>
+            <div class="header-derecha">
+                <div class="header-iconos">
+                    <a href="#"><i class="bi bi-search"></i></a>
+                    <% if (carrito.length > 0) {%>
+                    <a class="bag-red" href="/compras"><i class="bi bi-bag"></i></a>
+                    <%}else{%>
+                        <a href="/compras"><i class="bi bi-bag"></i></a>
+                    <%}%>
+            </div>
+            <%if(user) {%>
+                <div class="perfil">
+                    <img src="<%=user.image%>" alt="">
+                    <button class="btn-sesion"><%=user.username%></button>
+                </div>
+                <a class="cerrar-sesion" href="/auth/logout">Cerrar Sesion</a>
+                <%} else{%>
+                <div class="registrarse">
+                    <a href="/auth/signup">Registarse</a>
+                </div>
+            <%}%>
+        </div>
+        </div>
+    </div>
+</header>

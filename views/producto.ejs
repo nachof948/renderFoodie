@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/imagenes/Hero-Principal.png" type="image/x-icon">
+    <link rel="stylesheet" href="/Hojas de estilo/producto.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>FOODIE</title>
+</head>
+<body>
+    <header style="background-color: rgb(132,183,78);">
+        <div class="contenedor-header">
+            <a class="empresa" href="/">FOODIED</a>
+            <button id="menuResponsive" class="menu-responsive"><i class="bi bi-list"></i></button>
+            <div class="contenedor-menu-responsive">
+                <nav>
+                    <a href="/">Inicio</a>
+                    <a href="#menuEspecial">Menu</a>
+                    <a href="#sobreNosotros">Sobre Nosotros</a>
+                    <a href="#contactos">Contacto</a>
+                </nav>
+                <div class="header-derecha">
+                    <div class="header-iconos">
+                        <a href="#"><i class="bi bi-search"></i></a>
+                        <%if (carrito.length > 0) {%>
+                        <a class="bag" href="/compras"><i class="bi bi-bag"></i></a>
+                        <div class="circulo-rojo"></div>
+                        <%}else{%>
+                            <a href="/compras"><i class="bi bi-bag"></i></a>
+                        <%}%>
+                </div>
+                <%if(user) {%>
+                    <div class="perfil">
+                        <img src="<%=user.image%>" alt="">
+                        <a href="/auth/logout"><%=user.username%></a>
+                    </div>
+                    <%}else{%>
+                    <div class="registrarse">
+                        <a href="/auth/signup">Registarse</a>
+                    </div>
+                <%}%>
+            </div>
+            </div>
+        </div>
+
+    </header>
+    <main class="main-producto">
+    <section>
+            <div class="contenedor-producto">
+                <div class="producto" >
+                    <img class="img-producto"  src="<%=producto.imgUrl%>" >
+            <div class="segundo">
+                    <h1 class="nombre-producto"><%=producto.nombre%></h1>
+                    <div class="grupo1">
+                        <div class="alfa">
+                            <div class="estrellitas">
+                                <img class="miniEstrella" src="/imagenes/icons8-estrella.png" alt="estrella">
+                                <img class="miniEstrella" src="/imagenes/icons8-estrella.png" alt="estrella">
+                                <img class="miniEstrella" src="/imagenes/icons8-estrella.png" alt="estrella">
+                                <img class="miniEstrella" src="/imagenes/icons8-estrella.png" alt="estrella">
+                                <img class="miniEstrella" src="/imagenes/icons8-estrella.png" alt="estrella">
+                            </div> 
+                            <p><%=producto.rating%></p>  
+                        </div>
+                        <div class="beta">
+                            <p class="palabra">Vendidos</p>
+                            <p><%=producto.vendidos%></p>
+                        </div>
+                    </div>
+                        
+                    <h2 class="precio-producto">$<%=producto.precio%></h2>
+                    <p class="texto"><%=producto.descripcionDetallada%></p>
+                        <%if (user) {%>
+                            <form class="comprar" action="/compras/agregar" method="POST">
+                                <input type="hidden" name="nombre" value="<%=producto.nombre%>">
+                                <input type="hidden" name="imagen" value="<%=producto.imgUrl%>">
+                                <input type="hidden" name="precio" value="<%=producto.precio%>">
+                                <button class="comprar-ahora" type="submit">Comprar Ahora</button>
+                            </form>
+                        <%}else{%>
+                            <a href="/auth/signup">Comprar Ahora</a>
+                        <%}%>
+            </div>
+
+                </div>
+                
+        </div>
+    </section>
+</main>
+    <%- include('../views/partials/footer.ejs') %>
+<script src="js/header.js"></script>
+</body>
+</html>
+
